@@ -52,10 +52,8 @@ public class OverHeadNumber : UdonSharpBehaviour
         nameplate.text = player.displayName;
     }
 
-    public override void OnPlayerDataUpdated(VRCPlayerApi player, PlayerData.Info[] infos)
+    public override void OnPlayerDataUpdated(VRCPlayerApi player1, PlayerData.Info[] infos)
     {
-        if(player.playerId != this.player.playerId) return;
-        
         foreach (PlayerData.Info info in infos)
         {
             if (info.Key == "Talox.DancerGuidance.OverHeadNumber")
