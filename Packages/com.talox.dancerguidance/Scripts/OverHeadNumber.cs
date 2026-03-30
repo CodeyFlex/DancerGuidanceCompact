@@ -23,8 +23,12 @@ public class OverHeadNumber : UdonSharpBehaviour
     public float MaxDistanceForClick = 5.0f;
     public float ClickDelay = 60.0f;
     public float keepAlive = 8f;
+    public bool ResetEnabledAfterEvent = false;
+    public bool LookAtPlayers = false;
     [SerializeField]
     public TMP_Text nameplate;
+    [SerializeField]
+    public TMP_Text preference;
     [SerializeField]
     public TMP_Text text;
     [SerializeField]
@@ -44,16 +48,24 @@ public class OverHeadNumber : UdonSharpBehaviour
     {
         player = Networking.GetOwner(gameObject);
         UpdateEnabled();
+        SetPreference();
         nameplate.text = player.displayName;
     }
 
     public override void OnPlayerDataUpdated(VRCPlayerApi player, PlayerData.Info[] infos)
     {
+        if(player.playerId != this.player.playerId) return;
+        
         foreach (PlayerData.Info info in infos)
         {
             if (info.Key == "Talox.DancerGuidance.OverHeadNumber")
             {
                 UpdateEnabled();
+            }
+
+            if (info.Key == "Talox.DancerGuidance.Preference")
+            {
+                SetPreference();
             }
         }
     }
@@ -76,6 +88,7 @@ public class OverHeadNumber : UdonSharpBehaviour
             {
                 if (player.isLocal)
                 {
+                    CheckStartTime();
                     PlayerData.SetLong("Talox.DancerGuidance.OverHeadNumberStartTime", DateTime.Now.Ticks);
                 }
                 else
@@ -95,6 +108,11 @@ public class OverHeadNumber : UdonSharpBehaviour
         DateTime masterStartTime = new DateTime( PlayerData.GetLong(Networking.Master,"Talox.DancerGuidance.OverHeadNumberStartTime"));
         DateTime localStartTime = new DateTime( PlayerData.GetLong(player,"Talox.DancerGuidance.OverHeadNumberStartTime"));
         
+        if (player.isMaster)
+        {
+            masterStartTime = DateTime.Now;
+        }
+        
         Debug.Log($"MasterStartTime: {masterStartTime} LocalStartTime: {localStartTime} Diff: {masterStartTime - localStartTime} 8 Hours: { TimeSpan.FromHours(keepAlive)}");
         
         if (masterStartTime - (localStartTime + TimeSpan.FromHours(keepAlive)) > TimeSpan.Zero)
@@ -102,6 +120,10 @@ public class OverHeadNumber : UdonSharpBehaviour
             PlayerData.SetLong("Talox.DancerGuidance.OverHeadNumberStartTime", masterStartTime.Ticks);
             number = 0;
             PlayerData.SetInt("Talox.DancerGuidance.OverHeadNumberCount",0);
+            if (ResetEnabledAfterEvent)
+            {
+                PlayerData.SetBool("Talox.DancerGuidance.OverHeadNumber",false);
+            }
             RequestSerialization();
             Debug.Log($"Number: {number} set to 0");
         }
@@ -125,10 +147,17 @@ public class OverHeadNumber : UdonSharpBehaviour
         VRCPlayerApi.TrackingData HeadLocalPlayer = Networking.LocalPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head);
         transform.position = HeadOwner.position + offset;
         Vector3 lookDirection = -HeadLocalPlayer.position + transform.position;
-        lookDirection.y = 0; // Keep the text upright by ignoring vertical rotation
-        lookDirection.Normalize();
-        transform.rotation = Quaternion.LookRotation(lookDirection, Vector3.up);
-        
+        if (LookAtPlayers)
+        {
+            transform.rotation = Quaternion.LookRotation(lookDirection, Vector3.up);
+        }
+        else
+        {
+            lookDirection.y = 0; // Keep the text upright by ignoring vertical rotation
+            lookDirection.Normalize();
+            transform.rotation = Quaternion.LookRotation(lookDirection, Vector3.up);
+        }
+
         if (!IsEnabled)
         {
             text.text = "";
@@ -173,7 +202,10 @@ public class OverHeadNumber : UdonSharpBehaviour
         IsEnabled = PlayerData.GetBool(Networking.LocalPlayer, "Talox.DancerGuidance.OverHeadNumber");
         bool OwnerEnabled = PlayerData.GetBool(player, "Talox.DancerGuidance.OverHeadNumber");
         canvasGroup.alpha = !OwnerEnabled & IsEnabled ? 1 : 0;
-        text.text = number.ToString();
-        nameplate.color = number >= dancesNeeded ? green : number > 0 ? orange : red;
+    }
+
+    private void SetPreference()
+    {
+        preference.text = PlayerData.GetString(player, "Talox.DancerGuidance.Preference");
     }
 }
