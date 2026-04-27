@@ -13,11 +13,13 @@ New features:
   - Dances Needed - Dances No Longer Needed = Orange
   - Dances No Longer Needed - Max Dances = Red
   - Max Dances = No Dances Text (Red)
+  - Incrementing the counter after reaching "No Dances" state resets the counter.
 
  <img width="491" height="460" alt="image" src="https://github.com/user-attachments/assets/0e76be5e-4270-40c4-906e-6d39f884fa0c" />
 
-- Click Delay (Seconds in between each dance counter increment): "Number" seconds. (0.1 seconds in this image)
-- Keep Alive (How long dance count is persisted): "Number" hours. (3 hours in this image)
+- Offset (Counters position from the player it belongs to): XYZ values (Y increased to 0.6 in this image)
+- Click Delay (Seconds in between each dance counter increment): "Number" seconds. (Decreased to 0.1 seconds in this image)
+- Keep Alive (How long dance count is persisted): "Number" hours. (Decreased to 3 hours in this image)
 
 <video src="https://github.com/user-attachments/assets/6c091397-97ab-4eee-b08b-82812854dcc0" autoplay loop muted playsinline width="100%"></video>
 
