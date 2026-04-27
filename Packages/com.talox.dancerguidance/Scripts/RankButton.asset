@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: RankButton
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 3922dd02b614bf94b8434f1cdfc25ebd,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: d3567f189dad46f4f880562a890f1001,
     type: 2}
   udonAssembly: 
   assemblyError: 

@@ -19,14 +19,17 @@ public class OverHeadNumber : UdonSharpBehaviour
     [UdonSynced]
     private int uniqueId;
     public Vector3 offset;
-    public int dancesNeeded;
+    public int dancesNeeded = 2;
+    public int dancesNoLongerNeeded = 5;
+    public int maxDances = 10;
+    public string noDancesText = "ND";
     public float MaxDistanceForClick = 5.0f;
     public float ClickDelay = 60.0f;
     public float keepAlive = 8f;
     public bool ResetEnabledAfterEvent = false;
     public bool LookAtPlayers = false;
     [SerializeField]
-    public TMP_Text nameplate;
+    private UnityEngine.UI.Image buttonImage;
     [SerializeField]
     public TMP_Text preference;
     [SerializeField]
@@ -43,13 +46,31 @@ public class OverHeadNumber : UdonSharpBehaviour
     private Color red = new Color(1.0f, 0.0f, 0.0f, 1.0f);
     private Color green = new Color(0.0f, 1.0f, 0.0f, 1.0f);
     private Color orange = new Color(1.0f, 0.5f, 0.0f, 1.0f);
+    private Color white = new Color(1.0f, 1.0f, 1.0f, 1.0f);
     
     private void Start()
     {
         player = Networking.GetOwner(gameObject);
         UpdateEnabled();
         SetPreference();
-        nameplate.text = player.displayName;
+
+        // Number would disppear if display was toggled off and on, so to fix this:
+        // Check if a saved count exists in Player Data for this user.
+        int savedCount = PlayerData.GetInt(player, "Talox.DancerGuidance.OverHeadNumberCount");
+
+        if (savedCount > 0)
+        {
+            // If we find a saved count, set the synced variable to it and request serialization 
+            // so all clients update immediately upon joining.
+            number = savedCount;
+            RequestSerialization();
+        }
+        else
+        {
+            // If no saved count, ensure it starts at the default value
+            number = 0;
+            RequestSerialization();
+        }
     }
 
     public override void OnPlayerDataUpdated(VRCPlayerApi player1, PlayerData.Info[] infos)
@@ -59,6 +80,8 @@ public class OverHeadNumber : UdonSharpBehaviour
             if (info.Key == "Talox.DancerGuidance.OverHeadNumber")
             {
                 UpdateEnabled();
+                // When the toggle state changes, force a deserialization/update to refresh text color and content if needed.
+                OnDeserialization();
             }
 
             if (info.Key == "Talox.DancerGuidance.Preference")
@@ -132,11 +155,11 @@ public class OverHeadNumber : UdonSharpBehaviour
             Debug.Log($"Number: {number}");
         }
     }
-    
-    public override void OnDeserialization()
+
+    public override void OnDeserialization() // Triggers when data changes
     {
-        text.text = number.ToString();
-        nameplate.color = number >= dancesNeeded ? green : number > 0 ? orange : red;
+        text.text = GetDisplayTextForNumber(number);
+        buttonImage.color = GetColorForNumber(number);
     }
 
     public void Update()
@@ -173,17 +196,22 @@ public class OverHeadNumber : UdonSharpBehaviour
                 return;
             
             SendCustomNetworkEvent(NetworkEventTarget.Owner,nameof(OnClick));
-            number++;
-            text.text = number.ToString();
-            nameplate.color = number >= dancesNeeded ? green : number > 0 ? orange : red;
             CanClick = false;
             return;
         }
         
         CanClick = false;
-        number++;
-        text.text = number.ToString();
-        nameplate.color = number >= dancesNeeded ? green : number > 0 ? orange : red;
+
+        // 1. Calculate the next state based on current 'number'
+        int nextNumber = CalculateNextNumberState(number);
+
+        // 2. Update local UI immediately for responsiveness
+        text.text = GetDisplayTextForNumber(nextNumber);
+        buttonImage.color = GetColorForNumber(nextNumber);
+
+        // 3. Update the synced variable and save it
+        number = nextNumber;
+
         PlayerData.SetInt("Talox.DancerGuidance.OverHeadNumberCount", number);
         RequestSerialization();
         SendCustomEventDelayedSeconds(nameof(OnClickEnd),ClickDelay);
@@ -205,5 +233,45 @@ public class OverHeadNumber : UdonSharpBehaviour
     private void SetPreference()
     {
         preference.text = PlayerData.GetString(player, "Talox.DancerGuidance.Preference");
+    }
+
+    // Calculates the next number based on current state
+    private int CalculateNextNumberState(int currentNumber)
+    {
+        if (currentNumber < maxDances)
+        {
+            return currentNumber + 1;
+        }
+        else if (currentNumber == maxDances + 1)
+        {
+            // Jump directly to the state that represents "No dances"
+            return maxDances + 1;
+        }
+        else // currentNumber >= maxDances (Reset path)
+        {
+            return 0; // Reset
+        }
+    }
+
+    // Determines what text to show based on the number
+    private string GetDisplayTextForNumber(int num)
+    {
+        if (num >= maxDances)
+        {
+            return noDancesText;
+        }
+        else
+        {
+            return num.ToString();
+        }
+    }
+
+    // Determines the color based on the number ---
+    private Color GetColorForNumber(int num)
+    {
+        if (num == 0) return white;
+        else if (num > dancesNoLongerNeeded) return red;
+        else if (num > dancesNeeded && num <= dancesNoLongerNeeded) return orange;
+        else return green;
     }
 }

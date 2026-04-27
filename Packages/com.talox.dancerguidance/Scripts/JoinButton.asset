@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: JoinButton
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 18ad04a37c6c0814d98cae89ed6a9b15,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: ca63210f6d7be0948bdc28b6b37933c5,
     type: 2}
   udonAssembly: 
   assemblyError: 

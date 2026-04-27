@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: DancerRank
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: f5eb08d269d6a2a4886d2eb9bc613622,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 76d34fd8814ca8f458b672d92e4e13c9,
     type: 2}
   udonAssembly: 
   assemblyError: 

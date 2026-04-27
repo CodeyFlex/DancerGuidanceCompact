@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: DancerPreferences
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 690ccc8f3224a54449e2a02309e2c820,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: adab37b924163cc4c924774a1c071094,
     type: 2}
   udonAssembly: 
   assemblyError: 
