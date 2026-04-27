@@ -16,6 +16,9 @@ New features:
 
  <img width="491" height="460" alt="image" src="https://github.com/user-attachments/assets/0e76be5e-4270-40c4-906e-6d39f884fa0c" />
 
+- Click Delay (Seconds in between each dance counter increment): "Number" seconds. (0.1 seconds in this image)
+- Keep Alive (How long dance count is persisted): "Number" hours. (3 hours in this image)
+
 <video src="https://github.com/user-attachments/assets/6c091397-97ab-4eee-b08b-82812854dcc0" autoplay loop muted playsinline width="100%"></video>
 
 <video src="https://github.com/user-attachments/assets/00cfe19a-f8e1-4115-86ce-721494abbe0c" autoplay loop muted playsinline width="100%"></video>
