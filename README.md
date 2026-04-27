@@ -17,7 +17,7 @@ New features:
 
  <img width="491" height="460" alt="image" src="https://github.com/user-attachments/assets/0e76be5e-4270-40c4-906e-6d39f884fa0c" />
 
-- Offset (Counters position from the player it belongs to): XYZ values (Y increased to 0.6 in this image)
+- Offset (Counters position from the player it belongs to): XYZ values (Y decreased to 0.6 in this image)
 - Click Delay (Seconds in between each dance counter increment): "Number" seconds. (Decreased to 0.1 seconds in this image)
 - Keep Alive (How long dance count is persisted): "Number" hours. (Decreased to 3 hours in this image)
 
