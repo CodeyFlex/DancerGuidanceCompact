@@ -1,6 +1,6 @@
 Fork of Talox DancerGuidance system, they did most of the work on this system, I just made some small changes and sharing them for anyone who would like them :D
 
-New features:
+**New features:**
 
 - "No dances" state.
 - Compact design to only keep the counter, and add visibility to the number with the button box for contrast around the number.
