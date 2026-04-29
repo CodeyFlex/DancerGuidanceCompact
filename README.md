@@ -26,6 +26,8 @@ Fork of Talox DancerGuidance system, they did most of the work on this system, I
 
 <video src="https://github.com/user-attachments/assets/00cfe19a-f8e1-4115-86ce-721494abbe0c" autoplay loop muted playsinline width="100%"></video>
 
+<video src="https://github.com/user-attachments/assets/6a46f825-80e8-4924-b85d-462cdbaa0b47" autoplay loop muted playsinline width="100%"></video>
+
 # How to use
 
 1. Grab the latest unitypackage from: https://github.com/CodeyFlex/DancerGuidanceCompact/releases
