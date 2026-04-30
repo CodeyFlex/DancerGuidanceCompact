@@ -14,6 +14,7 @@ Fork of Talox DancerGuidance system, they did most of the work on this system, I
   - Dances No Longer Needed - Max Dances = Red
   - Max Dances = No Dances Text (Red)
   - Incrementing the counter after reaching "No Dances" state resets the counter.
+  - Made counters invisible for cameras.
 
  <img width="491" height="460" alt="image" src="https://github.com/user-attachments/assets/0e76be5e-4270-40c4-906e-6d39f884fa0c" />
 
@@ -24,6 +25,8 @@ Fork of Talox DancerGuidance system, they did most of the work on this system, I
 <video src="https://github.com/user-attachments/assets/6c091397-97ab-4eee-b08b-82812854dcc0" autoplay loop muted playsinline width="100%"></video>
 
 <video src="https://github.com/user-attachments/assets/00cfe19a-f8e1-4115-86ce-721494abbe0c" autoplay loop muted playsinline width="100%"></video>
+
+<video src="https://github.com/user-attachments/assets/db7838da-ec08-44fd-a597-34edd913ac28" autoplay loop muted playsinline width="100%"></video>
 
 # How to use
 
