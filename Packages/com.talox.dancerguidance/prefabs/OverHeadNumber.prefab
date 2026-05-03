@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4350940567027406407}
   - component: {fileID: 4028841723102887887}
   - component: {fileID: 2353731224854031144}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 9101239757185036235}
   - component: {fileID: 8309593053929239106}
   - component: {fileID: 3534015424331512528}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Prefrence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,8 +282,6 @@ GameObject:
   - component: {fileID: 7151927285790131219}
   - component: {fileID: 6214312310386925861}
   - component: {fileID: 8154588828550916159}
-  - component: {fileID: 509810276655076038}
-  - component: {fileID: 2403793577362625136}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -331,7 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 6637bc6d56f3c714cb6cd68a50fb0566, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -425,40 +423,6 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &509810276655076038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3531446669083152711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1533785930, guid: 661092b4961be7145bfbe56e1e62337b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AllowFocusView: 1
---- !u!65 &2403793577362625136
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3531446669083152711}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 70, y: 70, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7229391620507103235
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,7 +442,8 @@ GameObject:
   - component: {fileID: 8270341550961172179}
   - component: {fileID: 3891491829889135162}
   - component: {fileID: 1385146942152191170}
-  m_Layer: 5
+  - component: {fileID: 2483660207528242832}
+  m_Layer: 0
   m_Name: OverHeadNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -709,3 +674,24 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!65 &2483660207528242832
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7229391620507103235}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 300, y: 300, z: 300}
+  m_Center: {x: 0, y: 0, z: 0}
